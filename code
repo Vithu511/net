@@ -1,0 +1,374 @@
+
+
+
+Assi 2)  Page Life Cycle of ASP.NET. 
+(1 label,1 button)
+
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class _Default : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        Label1.Text = Label1.Text + "<br/>" + "Load";
+    }
+        protected void Page_PreInit(object sender, EventArgs e)
+    {
+         Label1.Text = Label1.Text + "<br/>" + "PreInit";
+    }
+    protected void Page_Init(object sender, EventArgs e)
+    {
+        Label1.Text = Label1.Text + "<br/>" + "Init";
+    }
+    protected void Page_InitComplete(object sender, EventArgs e)
+    {
+        Label1.Text = Label1.Text + "<br/>" + "InitComplete";
+    }
+    protected override void OnPreLoad(EventArgs e)
+    {
+        Label1.Text = Label1.Text + "<br/>" + "PreLoad";
+    }
+    protected void Page_LoadComplete(object sender, EventArgs e)
+    {
+         Label1.Text = Label1.Text + "<br/>" + "LoadComplete";
+    }
+    protected override void OnPreRender(EventArgs e)
+    {
+        Label1.Text = Label1.Text + "<br/>" + "PreRender";
+    }
+    protected override void OnSaveStateComplete(EventArgs e)
+    {
+        Label1.Text = Label1.Text + "<br/>" + "SaveStateComplete";
+    }
+    protected void Page_UnLoad(object sender, EventArgs e)
+    {
+        Label1.Text = Label1.Text + "<br/>" + "UnLoad";
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Label1.Text = Label1.Text + "<br/>" + "btnSubmit_Click";
+    }
+}
+
+
+
+
+Assi 4) postback and viewstate 
+ (2 DropDownList2,1 Button, 2nd EnableViewState="false")
+
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class _Default : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        bind1();
+        bind2();
+    }
+    public void bind1()
+    {
+        ListItem l1 = new ListItem("India");
+        ListItem l2 = new ListItem("US");
+        ListItem l3 = new ListItem("Japan");
+        DropDownList1.Items.Add(l1);
+        DropDownList1.Items.Add(l2);
+        DropDownList1.Items.Add(l3);
+    }
+
+    public void bind2()
+    {
+        ListItem l1 = new ListItem("India");
+        ListItem l2 = new ListItem("US");
+        ListItem l3 = new ListItem("Japan");
+        DropDownList2.Items.Add(l1);
+        DropDownList2.Items.Add(l2);
+        DropDownList2.Items.Add(l3);
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+
+    }
+}
+
+
+
+
+
+Assi 5) validation controls 
+
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class Default2 : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Label7.Text = "Name :- " + TextBox1.Text;
+        Label7.Visible = true;
+        Label8.Text = "Age :- " + TextBox2.Text;
+        Label8.Visible = true;
+        Label9.Text = "Salary :- " + TextBox3.Text;
+        Label9.Visible = true;
+
+        if (RadioButton1.Checked)
+        {
+            Label10.Text = " Gender :- Male";
+            Label10.Visible = true;
+        }
+        else
+        {
+            Label10.Text = " Gender :- Female";
+            Label10.Visible = true;
+        }
+        if (CheckBox1.Checked)
+        {
+            Label11.Visible = true;
+            Label11.Text = "Known Language :- " + CheckBox1.Text;
+        }
+        if (CheckBox2.Checked)
+        {
+            Label11.Visible = true;
+            Label11.Text += "," + CheckBox2.Text;
+        }
+        string msg = "";
+        foreach (ListItem li in ListBox1.Items)
+        {
+            if (li.Selected == true)
+            {
+                msg += "<BR>" + li.Text + " is selected.";
+            }
+        }
+        Label12.Text = msg;
+    }
+}
+
+
+
+
+
+
+Assi 6)  DropDownList box, CheckButtonList, RadioButtonList controls.
+
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class _Default : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+       
+        Label1.Text = "Selected Item(s):<br /><br />";
+        for (int i = 0; i < DropDownList1.Items.Count; i++)
+
+        {
+            if (DropDownList1.Items[i].Selected)
+            {
+                 Label1.Text += DropDownList1.Items[i].Text + "<br />";
+            }
+        }
+
+        Label2.Text = "Selected Item(s):<br /><br />";
+        for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+        {
+            if (CheckBoxList1.Items[i].Selected)
+            {
+                Label2.Text += CheckBoxList1.Items[i].Text + "<br />";
+            }
+         }
+       
+        Label3.Text = "Selected Item(s):<br /><br />";
+        for (int i = 0; i < RadioButtonList1.Items.Count; i++)
+        {
+            if (RadioButtonList1.Items[i].Selected)
+            {
+                Label3.Text += RadioButtonList1.Items[i].Text + "<br />";
+            }
+        } 
+    }
+}
+
+
+
+
+
+  Assi 11) shopping cart application 
+(2 labale , 2 button , HiddenField1)
+
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class _Default : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Session["Count"] = Convert.ToInt32(Session["Count"]) + 1;
+      Label1.Text = Session["Count"].ToString();
+
+    }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        if (HiddenField1.Value != null)
+        {
+            try
+            {
+                int val = Convert.ToInt32(HiddenField1.Value) + 1;
+                HiddenField1.Value = val.ToString();
+                Label2.Text = val.ToString();
+            }
+            catch (Exception exc)
+            {
+                Response.Write(exc);
+            }
+        }
+
+    }
+}
+
+
+
+
+
+
+		
+Assi 12)  Profiles/Themes using skin files.
+(2 Labale , 2 Texbox,1 Button, 2 Labale)
+
+
+//Profiles
+<configuration>
+	<system.web>
+		<compilation debug="true" targetFramework="4.0"/>
+		<profile>
+			<properties>
+				<add name="Name" type="String"/>
+				<add name="Class" type="String"/>
+			</properties>
+		</profile>
+	</system.web>
+</configuration>
+
+
+
+
+public partial class _Default : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!this.IsPostBack)
+        {
+            ProfileCommon pc = this.Profile.GetProfile(Profile.UserName);
+
+            if (pc != null)
+            {
+                this.TextBox1.Text = pc.Name;
+                this.TextBox2.Text = pc.Class;
+            }
+        }
+
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        ProfileCommon pc = this.Profile.GetProfile(Profile.UserName);
+
+        if (pc != null)
+        {
+            pc.Name = this.TextBox1.Text;
+            pc.Class = this.TextBox2.Text;
+
+            Label3.Text = "Name " + TextBox1.Text;
+            Label3.Visible = true;
+            Label4.Text = "class " + TextBox2.Text;
+            Label4.Visible = true;
+            pc.Save();
+        }
+
+    }
+}
+
+//skin file
+
+<pages theme="Theme1"></pages>
+
+
+
+
+
+
+Assi 8) Repeater control 
+  ((1 GridView.))
+
+<table border ="2">
+<asp:Repeater ID="Repeater1" runat="server"
+DataSourceID="SqlDataSource1">
+<HeaderTemplate >
+<tr ><td style ="background-color:Lime ;">ROLL NO</td>
+<td style ="background-color:Lime ;">NAME</td></tr>
+</HeaderTemplate>
+<ItemTemplate >
+<tr><td><%#Eval("rno") %></td>
+<td><%#Eval("name") %></td></tr></ItemTemplate>
+<AlternatingItemTemplate >
+<tr><td style ="background-color :Gray ;"><%#Eval("rno") %></td>
+<td style ="background-color :Gray;"><%#Eval("name")%> </td></tr>
+</AlternatingItemTemplate>
+</asp:Repeater> </table>
+
+
+
+
+Assi 9) Demonstrate paging, sorting, 
+	(1 GridView.)
+no code
+
+PageSize="2"
+
+
+
+
+Assi 10) editing , Deleting
+
+  UpdateCommand="update [student] set [name]=@name where [rno]=@rno" DeleteCommand="delete from [student] where [rno]=@rno">
+
+
+
+
+Assi 18) Web Service 
+
+int a = Convert.ToInt32(TextBox1.Text);
+int b = Convert.ToInt32(TextBox2.Text);
+ws.WebService w = new ws.WebService();
+int c= w.add(a, b);
+Label1.Text = c.ToString();
+
+
+[WebMethod]
+public int add(int a,int b)
+{
+return a+b;
+}
+
+
+
+
+
+
+
+
+
+
